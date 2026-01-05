@@ -1,4 +1,4 @@
-package com.back.domain.post.post.document;
+package com.back.domain.post.document;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;

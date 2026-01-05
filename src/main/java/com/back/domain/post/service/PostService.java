@@ -1,9 +1,11 @@
-package com.back.domain.post.post.service;
+package com.back.domain.post.service;
 
-import com.back.domain.post.post.document.Post;
-import com.back.domain.post.post.repository.PostRepository;
+import com.back.domain.post.document.Post;
+import com.back.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service // 어노테이션으로 서비스 컴포넌트 지정
 @RequiredArgsConstructor
@@ -22,6 +24,10 @@ public class PostService {
         Post post = new Post(title, content, author);
 
         return postRepository.save(post);
+    }
+
+    public List<Post> findAll(){
+        return postRepository.findAll();
     }
 
 }

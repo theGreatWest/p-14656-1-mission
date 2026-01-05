@@ -1,7 +1,7 @@
 package com.back.global.initData;
 
-import com.back.domain.post.post.document.Post;
-import com.back.domain.post.post.service.PostService;
+import com.back.domain.post.document.Post;
+import com.back.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
@@ -19,15 +19,18 @@ public class BaseInitData {
     @Bean
     public ApplicationRunner baseInitDataRunner (){
         return args->{
-            addSampleData();
+            work1();
+            work2();
         };
     }
 
-    private void addSampleData(){
+    // 개수 0개이면 Post 데이터 10개 생성
+    private void work1(){
         log.debug("Post entity 개수: {}", postService.count());
 
         if(postService.count() > 0) return;
 
+        log.debug("샘플 Post 데이터 생성");
         for(int idx=1; idx<=10; idx++){
             String title = "Sample Post Title " + idx;
             String content = "This is the content of sample post number " + idx + ".";
@@ -36,6 +39,15 @@ public class BaseInitData {
             Post post = postService.create(title, content, author);
 
             log.debug("Create Post: {}", post.toString());
+        }
+    }
+
+    // 기존 Post 전체 조회 및 로깅으로 저장된 데이터 확인
+    private void work2(){
+        log.debug("기존 Post 데이터 전체 조회");
+
+        for (Post post : postService.findAll()){
+            log.debug("Existing Post: {}", post);
         }
     }
 }
