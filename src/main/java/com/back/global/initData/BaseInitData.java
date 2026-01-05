@@ -8,6 +8,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Optional;
+
 @Configuration // 설정 클래스 지정
 @Slf4j // 어노테이션 추가로 로깅 기능 활성화
 @RequiredArgsConstructor // 생성자 기반 의존성 주입
@@ -21,6 +23,7 @@ public class BaseInitData {
         return args->{
             work1();
             work2();
+            work3();
         };
     }
 
@@ -48,6 +51,22 @@ public class BaseInitData {
 
         for (Post post : postService.findAll()){
             log.debug("Existing Post: {}", post);
+        }
+    }
+
+    // Post 단건 조회 테스트 로직 추가
+    private void work3(){
+        log.debug("Post 단건 조회");
+
+        for (Post post : postService.findAll()){
+            Optional<Post> opPost = postService.findById(post.getId());
+
+            if(opPost.isEmpty()){
+                log.debug("Post ID {}는 존재하지 않습니다.", post.getId());
+                continue;
+            }
+
+            log.debug("조회된 Post: {}", opPost.get());
         }
     }
 }

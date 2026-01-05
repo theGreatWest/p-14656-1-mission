@@ -1,5 +1,6 @@
 package com.back.domain.post.document;
 
+import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -12,6 +13,7 @@ import java.time.OffsetDateTime;
 // 검색 방식을 저장 시점에 필드 타입으로 미리 결정해야 한다.
 // 필드 타입 변경 시 인덱스 재생성 필요 (마이그레이션)
 
+@Getter
 @Document(indexName = "posts")
 // Elasticsearch에 posts 인덱스 생성
 // JPA의 @Entity + @Table(name="posts")과 동일
