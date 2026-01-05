@@ -1,5 +1,6 @@
 package com.back.global.initData;
 
+import com.back.domain.post.post.document.Post;
 import com.back.domain.post.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,11 +19,23 @@ public class BaseInitData {
     @Bean
     public ApplicationRunner baseInitDataRunner (){
         return args->{
-            totalPostEntityCount();
+            addSampleData();
         };
     }
 
-    private void totalPostEntityCount(){
+    private void addSampleData(){
         log.debug("Post entity 개수: {}", postService.count());
+
+        if(postService.count() > 0) return;
+
+        for(int idx=1; idx<=10; idx++){
+            String title = "Sample Post Title " + idx;
+            String content = "This is the content of sample post number " + idx + ".";
+            String author = "Author "+ idx;
+
+            Post post = postService.create(title, content, author);
+
+            log.debug("Create Post: {}", post.toString());
+        }
     }
 }
