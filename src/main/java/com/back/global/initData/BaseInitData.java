@@ -2,6 +2,7 @@ package com.back.global.initData;
 
 import com.back.domain.post.document.Post;
 import com.back.domain.post.service.PostService;
+import com.back.global.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
@@ -59,14 +60,15 @@ public class BaseInitData {
         log.debug("Post 단건 조회");
 
         for (Post post : postService.findAll()){
-            Optional<Post> opPost = postService.findById(post.getId());
+            try{
+                Post row = postService.findById(post.getId());
 
-            if(opPost.isEmpty()){
-                log.debug("Post ID {}는 존재하지 않습니다.", post.getId());
-                continue;
+                if (post.getId().equals("AkkgjZsBUrO7r60C6TTP")) throw new NotFoundException("NotFoundException: id=AkkgjZsBUrO7r60C6TTP");
+
+                log.debug("조회된 Post: {}", row);
+            }catch (NotFoundException e){
+                log.debug(e.getMessage());
             }
-
-            log.debug("조회된 Post: {}", opPost.get());
         }
     }
 }
