@@ -1,9 +1,12 @@
 package com.back;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @SpringBootApplication
+@EnableElasticsearchRepositories // lasticsearch Repository 자동 스캔 활성화
 public class BackApplication {
 
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package com.back.global.initData;
 
-import com.back.domain.post.service.PostService;
+import com.back.domain.post.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
