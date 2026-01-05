@@ -1,3 +1,25 @@
+# ---------------------------------
+# Default: text files normalized
+# ---------------------------------
+* text=auto
+
+# ---------------------------------
+# Line endings
+# ---------------------------------
+# Unix scripts
 /gradlew text eol=lf
+*.sh text eol=lf
+
+# Windows scripts
 *.bat text eol=crlf
-*.jar binary
+
+# ---------------------------------
+# Binary files
+# ---------------------------------
+*.jar  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
